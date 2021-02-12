@@ -1,0 +1,37 @@
+{
+    "name": "fuzion-lang",
+    "displayName": "Fuzion",
+    "description": "Syntax highlighting for Fuzion Language",
+    "version": "0.1.0",
+    "engines": {
+        "vscode": "^1.53.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "icon": "images/banner.png",
+    "repository": "https://github.com/Ivo-Balbaert/vscode-fuzion",
+    "publisher": "Ivo-Balbaert",
+    "contributes": {
+        "languages": [
+            {
+                "id": "fuzion",
+                "aliases": [
+                    "fuzion",
+                    "fuzion"
+                ],
+                "extensions": [
+                    ".fz"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "fuzion",
+                "scopeName": "source.fz",
+                "path": "./syntaxes/fuzion.tmLanguage.json"
+            }
+        ]
+    }
+}
