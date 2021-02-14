@@ -8,4 +8,5 @@ To start using the extension, download, unzip and copy it into your <user home>/
 
 Syntax Highlighting for `.fz` files
 
-![](images/banner.png)
+![Preview](images/vscode.png)
+![Fuzion logo](images/banner.png)
