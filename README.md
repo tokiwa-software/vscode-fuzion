@@ -2,7 +2,7 @@
 
 This is a Visual Studio Code extension to support development in the [Fuzion Programming Language](https://flang.dev).
 
-To start using the extension, download, unzip and copy it into your <user home>/.vscode/extensions folder and restart VS Code.
+To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o folder into your <user home>/.vscode/extensions folder and restart VS Code.
 
 ## Features
 
