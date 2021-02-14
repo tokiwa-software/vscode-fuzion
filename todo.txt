@@ -1,0 +1,1 @@
+- numbers and strings should not be highlighted the same as keywords
