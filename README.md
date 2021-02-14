@@ -1,4 +1,4 @@
-# vale-lang README
+# Fuzion -lang README
 
 This is a Visual Studio Code extension to support development in the [Fuzion Programming Language](https://flang.dev).
 
