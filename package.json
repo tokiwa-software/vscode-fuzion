@@ -15,9 +15,9 @@
     "contributes": {
         "languages": [
             {
-                "id": "fuzion",
+                "id": "Fuzion",
                 "aliases": [
-                    "fuzion",
+                    "Fuzion",
                     "fuzion"
                 ],
                 "extensions": [
@@ -28,7 +28,7 @@
         ],
         "grammars": [
             {
-                "language": "fuzion",
+                "language": "Fuzion",
                 "scopeName": "source.fz",
                 "path": "./syntaxes/fuzion.tmLanguage.json"
             }

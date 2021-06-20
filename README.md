@@ -9,4 +9,4 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 Syntax Highlighting for `.fz` files
 
 ![Preview](images/vscode.png)
-![Fuzion logo](images/banner.png)
+![Fuzion logo](images/fuzion_logo_40.png)

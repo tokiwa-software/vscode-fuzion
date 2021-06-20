@@ -7,3 +7,4 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [Unreleased]
 
 - Initial release Feb 12 2021
+- 2021 Feb 15: Capitalized language name to Fuzion
