@@ -34,6 +34,23 @@
 		"comment": {
 			"patterns": [
 				{
+					"name": "comment.line",
+					"begin": "(#)(.*)",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment"
+						},
+						"1": {
+							"name": "comment.content"
+						}
+					},
+					"end": "(?=$)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment"
+						}
+					}
+				},				{
 					"name": "comment.block.documentation",
 					"begin": "/\\*\\*(?!/)",
 					"beginCaptures": {
