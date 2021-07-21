@@ -50,7 +50,8 @@
 							"name": "punctuation.definition.comment"
 						}
 					}
-				},				{
+				},
+				{
 					"name": "comment.block.documentation",
 					"begin": "/\\*\\*(?!/)",
 					"beginCaptures": {
