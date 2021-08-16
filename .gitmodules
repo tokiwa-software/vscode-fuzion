@@ -1,0 +1,3 @@
+[submodule "fuzion-lsp-server"]
+	path = fuzion-lsp-server
+	url = ssh://git@git.tokiwa.software:2222/tokiwa/fuzion-lsp-server.git

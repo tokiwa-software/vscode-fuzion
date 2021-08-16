@@ -1,5 +1,5 @@
 const net = require('net');
-var vscode = require('vscode');
+const vscode = require('vscode');
 const child_process = require('child_process');
 const { LanguageClient } = require('vscode-languageclient/node');
 
@@ -11,12 +11,14 @@ function activate(context)
   channel = vscode.window.createOutputChannel("vscode-fuzion");
   context.subscriptions.push(channel);
 
-  args_make = debug
-    ? [`debug`, `-C`, `${context.extensionPath}/../fuzion-lsp-server/`, `-f`, `${context.extensionPath}/../fuzion-lsp-server/Makefile`]
-    : [`-C`, `${context.extensionPath}/../fuzion-lsp-server/`, `-f`, `${context.extensionPath}/../fuzion-lsp-server/Makefile`];
+  lspServer = debug
+    ? {
+      command: 'make',
+      arguments: [`debug`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`]
+    }
+    : 'not implemented';
 
-  //TODO get rid of absolute paths
-  child_process.spawn(`make`, args_make).stdout.on('data', function (data)
+  child_process.spawn(lspServer.command, lspServer.arguments).stdout.on('data', function (data)
   {
     const stdOut = data.toString().split('\n');
     stdOut.forEach(line => channel.appendLine('SERVER: ' + line));

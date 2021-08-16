@@ -8,6 +8,15 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 
 ## Features
 
-Syntax Highlighting for `.fz` files
+- Syntax Highlighting for `.fz` files
+- Language Server Client
 
 ![Preview](images/vscode.png)
+
+## Develop
+- git submodule update --init --recursive
+- start debugging in vscode
+- (optional) attach to java debugger at port 8000
+
+## Build
+- NYI
