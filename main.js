@@ -7,61 +7,66 @@ let client, channel;
 
 function activate(context)
 {
-    channel = vscode.window.createOutputChannel("vscode-fuzion");
-    context.subscriptions.push(channel);
+  const debug = context.extensionMode == vscode.ExtensionMode.Development;
+  channel = vscode.window.createOutputChannel("vscode-fuzion");
+  context.subscriptions.push(channel);
 
-    //TODO get rid of absolute paths
-    child_process.spawn(`make`, [`-C`, `${context.extensionPath}/../fuzion-lsp-server/`, `-f`, `${context.extensionPath}/../fuzion-lsp-server/Makefile`])
-        .stdout.on('data', function (data)
-        {
-            const stdOut = data.toString().split('\n');
-            stdOut.forEach(line => channel.appendLine('SERVER: ' + line));
-            const port = stdOut
-                .filter(line => line.startsWith('socket opened '))
-                .map(line => parseInt(line.replace( /\D*/g, '')))
-                .find(() => true);
-            if(!port){
-                return;
-            }
+  args_make = debug
+    ? [`debug`, `-C`, `${context.extensionPath}/../fuzion-lsp-server/`, `-f`, `${context.extensionPath}/../fuzion-lsp-server/Makefile`]
+    : [`-C`, `${context.extensionPath}/../fuzion-lsp-server/`, `-f`, `${context.extensionPath}/../fuzion-lsp-server/Makefile`];
 
-            const serverOptions = () =>
-            {
-                const socket = net.connect(port);
-                const result = {
-                    writer: socket,
-                    reader: socket
-                };
-                return Promise.resolve(result);
-            };
+  //TODO get rid of absolute paths
+  child_process.spawn(`make`, args_make).stdout.on('data', function (data)
+  {
+    const stdOut = data.toString().split('\n');
+    stdOut.forEach(line => channel.appendLine('SERVER: ' + line));
+    const port = stdOut
+      .filter(line => line.startsWith('socket opened on port:'))
+      .map(line => parseInt(line.replace(/\D*/g, '')))
+      .find(() => true);
+    if (!port)
+    {
+      return;
+    }
 
-            const clientOptions = {
-                documentSelector: [{ scheme: 'file', language: 'Fuzion' }],
+    const serverOptions = () =>
+    {
+      const socket = net.connect(port);
+      const result = {
+        writer: socket,
+        reader: socket
+      };
+      return Promise.resolve(result);
+    };
 
-            };
+    const clientOptions = {
+      documentSelector: [{ scheme: 'file', language: 'Fuzion' }],
 
-            client = new LanguageClient(
-                'Fuzion Language Server',
-                serverOptions,
-                clientOptions
-            );
+    };
 
-            channel.appendLine('EXTENSION: Fuzion Language Client started');
-            client.start();
-        });
+    client = new LanguageClient(
+      'Fuzion Language Server',
+      serverOptions,
+      clientOptions
+    );
+
+    channel.appendLine('CLIENT: Fuzion Language Client started');
+    client.start();
+  });
 
 
 }
 
 function deactivate()
 {
-    if (!client)
-    {
-        return undefined;
-    }
-    return client.stop();
+  if (!client)
+  {
+    return undefined;
+  }
+  return client.stop();
 }
 
 module.exports = {
-    activate,
-    deactivate
+  activate,
+  deactivate
 };
