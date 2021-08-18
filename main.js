@@ -3,7 +3,7 @@ const vscode = require('vscode');
 const child_process = require('child_process');
 const { LanguageClient, TransportKind } = require('vscode-languageclient/node');
 
-let client, channel;
+let client, server, channel;
 
 function activate(context)
 {
@@ -34,7 +34,17 @@ function activate(context)
       }
       : 'not implemented';
 
-    child_process.spawn(lspServer.command, lspServer.arguments).stdout.on('data', function (data)
+    server = child_process.spawn(lspServer.command, lspServer.arguments);
+
+    server.once("exit", (code) =>
+    {
+      if (code !== 0)
+      {
+        vscode.window.showErrorMessage(`Unable to start server. Code: ${code}`);
+      }
+    });
+
+    server.stdout.on('data', function (data)
     {
       const stdOut = data.toString().split('\n');
       stdOut.forEach(line => channel.appendLine('SERVER: ' + line));
@@ -77,6 +87,14 @@ function activate(context)
 
 function deactivate()
 {
+  if (channel)
+  {
+    channel.dispose();
+  }
+  if (server)
+  {
+    server.kill("SIGTERM");
+  }
   if (!client)
   {
     return undefined;
