@@ -5,6 +5,22 @@ const { LanguageClient, TransportKind } = require('vscode-languageclient/node');
 
 let client, server, channel;
 
+function checkJava(){
+  try
+  {
+    child_process.execSync('java').toString();
+  }
+  catch (error)
+  {
+    if (error.status !== 1)
+    {
+      vscode.window.showErrorMessage('Please install Java and make sure it\'s in PATH.');
+      return false;
+    }
+  }
+  return true;
+}
+
 function activate(context)
 {
   const transportKind = TransportKind.socket;
@@ -12,17 +28,8 @@ function activate(context)
   channel = vscode.window.createOutputChannel("vscode-fuzion");
   context.subscriptions.push(channel);
 
-  try
-  {
-    return child_process.execSync('java').toString();
-  }
-  catch (error)
-  {
-    if (error.status !== 1)
-    {
-      vscode.window.showErrorMessage('Please install Java and make sure it\'s in PATH.');
-      return;
-    }
+  if(!checkJava()){
+    return;
   }
 
   if (transportKind === TransportKind.socket)
@@ -30,11 +37,18 @@ function activate(context)
     lspServer = debug
       ? {
         command: 'make',
-        arguments: [`debug`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`]
+        arguments: [`debug`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`],
+        options: {
+          env:{
+            ...process.env,
+            "PRECONDITIONS": "true",
+            "POSTCONDITIONS": "true",
+          }
+        }
       }
       : 'not implemented';
 
-    server = child_process.spawn(lspServer.command, lspServer.arguments);
+    server = child_process.spawn(lspServer.command, lspServer.arguments, lspServer.options);
 
     server.once("exit", (code) =>
     {
