@@ -44,6 +44,11 @@ function activate(context)
       }
     });
 
+    server.stderr.on('data', function (data){
+      const stdErr = data.toString().split('\n');
+      stdErr.forEach(line => channel.appendLine('SERVER-ERROR: ' + line));
+    });
+
     server.stdout.on('data', function (data)
     {
       const stdOut = data.toString().split('\n');
