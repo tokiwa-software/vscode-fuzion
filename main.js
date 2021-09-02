@@ -37,7 +37,7 @@ function activate(context)
     lspServer = debug
       ? {
         command: 'make',
-        arguments: [`debug`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`],
+        arguments: [`debug`, `-s`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`],
         options: {
           env:{
             ...process.env,
