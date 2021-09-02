@@ -43,10 +43,11 @@ function activate(context)
             ...process.env,
             "PRECONDITIONS": "true",
             "POSTCONDITIONS": "true",
+            "DEBUG": "true",
           }
         }
       }
-      : 'not implemented';
+      : 'NYI';
 
     server = child_process.spawn(lspServer.command, lspServer.arguments, lspServer.options);
 
