@@ -9,7 +9,7 @@
     "categories": [
         "Programming Languages"
     ],
-    "icon": "./images/fuzion_logo_40.png",
+    "icon": "images/fuzion_logo_196.png",
     "repository": {
         "type": "git",
         "url": "https://github.com/Ivo-Balbaert/vscode-fuzion"
