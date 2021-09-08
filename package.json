@@ -41,10 +41,15 @@
         "vscode-languageclient": "^7.0.0"
     },
     "devDependencies": {
-        "@types/vscode": "^1.52.0"
+        "@types/vscode": "^1.52.0",
+        "esbuild": "^0.12.25",
+        "vsce": "^1.97.0"
     },
     "activationEvents": [
         "onLanguage:Fuzion"
     ],
-    "main": "main.js"
+    "main": "main.js",
+    "scripts": {
+        "esbuild": "esbuild ./main.ts --bundle --outfile=main.js --external:vscode --format=cjs --platform=node --sourcemap"
+    }
 }

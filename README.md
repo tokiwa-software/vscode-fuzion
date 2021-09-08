@@ -14,9 +14,11 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 ![Preview](images/vscode.png)
 
 ## Develop
+- Prerequisites: make, node, npm, java
 - git submodule update --init --recursive
 - start debugging in vscode
 - (optional) attach to java debugger at port 8000
 
 ## Build
-- NYI
+- Prerequisites: make, node, npm, java
+- make build-vsix

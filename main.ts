@@ -1,9 +1,9 @@
-const net = require('net');
-const vscode = require('vscode');
-const child_process = require('child_process');
-const { LanguageClient, TransportKind } = require('vscode-languageclient/node');
+import net from 'net';
+import vscode from 'vscode';
+import child_process from 'child_process';
+import { LanguageClient, TransportKind } from 'vscode-languageclient/node';
 
-let client, server, channel;
+let client:LanguageClient, server: child_process.ChildProcessWithoutNullStreams, channel: vscode.OutputChannel;
 
 function checkJava(){
   try
@@ -34,7 +34,7 @@ function activate(context)
 
   if (transportKind === TransportKind.socket)
   {
-    lspServer = debug
+    const lspServer = debug
       ? {
         command: 'make',
         arguments: [`debug`, `-s`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`],
@@ -47,7 +47,19 @@ function activate(context)
           }
         }
       }
-      : 'NYI';
+      // NYI loose dependency on make and javac for production
+      : {
+        command: 'make',
+        arguments: [`-s`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`, `tcp`],
+        options: {
+          env:{
+            ...process.env,
+            "PRECONDITIONS": "false",
+            "POSTCONDITIONS": "false",
+            "DEBUG": "false",
+          }
+        }
+      };
 
     server = child_process.spawn(lspServer.command, lspServer.arguments, lspServer.options);
 

@@ -2,3 +2,9 @@
 .vscode-test/**
 .gitignore
 vsc-extension-quickstart.md
+!fuzion-lsp-server/jars/**
+!fuzion-lsp-server/classes/**
+!fuzion-lsp-server/Makefile
+!fuzion-lsp-server/build/**
+fuzion-lsp-server/**
+node_modules/**
