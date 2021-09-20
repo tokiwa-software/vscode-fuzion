@@ -43,13 +43,17 @@
     "devDependencies": {
         "@types/vscode": "^1.52.0",
         "esbuild": "^0.12.25",
-        "vsce": "^1.97.0"
+        "ovsx": "^0.2.1",
+        "vsce": "^1.99.0"
     },
     "activationEvents": [
         "onLanguage:Fuzion"
     ],
     "main": "main.js",
     "scripts": {
-        "esbuild": "esbuild ./main.ts --bundle --outfile=main.js --external:vscode --format=cjs --platform=node --sourcemap"
+        "esbuild": "esbuild ./main.ts --bundle --outfile=main.js --external:vscode --format=cjs --platform=node --sourcemap",
+        "vscode:prepublish": "npm i && npx esbuild && make -C fuzion-lsp-server classes",
+        "vscode:package": "./node_modules/.bin/vsce package",
+        "ovsx-publish": "echo 'npx ovsx publish fuzion-lang-${version}.vsix -p <token>'"
     }
 }
