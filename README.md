@@ -11,7 +11,18 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 - Syntax Highlighting for `.fz` files
 - Language Server Client
 
+### Syntax Highlighting
 ![Preview](images/vscode.png)
+### Definition
+![](images/lsp_definition.png)
+### Completion
+![](images/lsp_completion.png)
+### Hover
+![](images/lsp_hover.png)
+### References
+![](images/lsp_references.png)
+### Diagnostics
+![](images/lsp_diagnostics.png)
 
 ## Develop
 - Prerequisites: make, node, npm, java
