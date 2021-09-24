@@ -1,19 +1,20 @@
 import net from 'net';
 import vscode from 'vscode';
 import child_process from 'child_process';
-import { LanguageClient, TransportKind } from 'vscode-languageclient/node';
+import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
-let client:LanguageClient, server: child_process.ChildProcessWithoutNullStreams, channel: vscode.OutputChannel;
+let client: LanguageClient;
+let server: child_process.ChildProcessWithoutNullStreams;
+let clientChannel: vscode.OutputChannel;
+let serverMessageOutputChannel: vscode.OutputChannel;
+let serverOutputChannel: vscode.OutputChannel;
 
-function checkJava(){
-  try
-  {
+function checkJava() {
+  try {
     child_process.execSync('java').toString();
   }
-  catch (error)
-  {
-    if (error.status !== 1)
-    {
+  catch (error) {
+    if (error.status !== 1) {
       vscode.window.showErrorMessage('Please install Java and make sure it\'s in PATH.');
       return false;
     }
@@ -21,25 +22,27 @@ function checkJava(){
   return true;
 }
 
-function activate(context)
-{
+function activate(context) {
   const transportKind = TransportKind.socket;
   const debug = context.extensionMode == vscode.ExtensionMode.Development;
-  channel = vscode.window.createOutputChannel("vscode-fuzion");
-  context.subscriptions.push(channel);
 
-  if(!checkJava()){
+  clientChannel = vscode.window.createOutputChannel("vscode-fuzion");
+  serverMessageOutputChannel = vscode.window.createOutputChannel("vscode-fuzion_server_message");
+  serverOutputChannel = vscode.window.createOutputChannel("vscode-fuzion_server");
+
+  context.subscriptions.push(clientChannel);
+
+  if (!checkJava()) {
     return;
   }
 
-  if (transportKind === TransportKind.socket)
-  {
+  if (transportKind === TransportKind.socket) {
     const lspServer = debug
       ? {
         command: 'make',
         arguments: [`debug`, `-s`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`],
         options: {
-          env:{
+          env: {
             ...process.env,
             "PRECONDITIONS": "true",
             "POSTCONDITIONS": "true",
@@ -52,7 +55,7 @@ function activate(context)
         command: 'make',
         arguments: [`-s`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`, `tcp`],
         options: {
-          env:{
+          env: {
             ...process.env,
             "PRECONDITIONS": "false",
             "POSTCONDITIONS": "false",
@@ -63,34 +66,29 @@ function activate(context)
 
     server = child_process.spawn(lspServer.command, lspServer.arguments, lspServer.options);
 
-    server.once("exit", (code) =>
-    {
-      if (code !== 0)
-      {
-        vscode.window.showErrorMessage(`Unable to start server. Code: ${code}`);
+    server.once("exit", (code) => {
+      if (code !== 0) {
+        vscode.window.showErrorMessage(`Fuzion language server crashed. Exit code: ${code}`);
       }
     });
 
-    server.stderr.on('data', function (data){
+    server.stderr.on('data', function (data) {
       const stdErr = data.toString().split('\n');
-      stdErr.forEach(line => channel.appendLine('SERVER-ERROR: ' + line));
+      stdErr.forEach(line => serverOutputChannel.appendLine('stderr: ' + line));
     });
 
-    server.stdout.on('data', function (data)
-    {
+    server.stdout.on('data', function (data) {
       const stdOut = data.toString().split('\n');
-      stdOut.forEach(line => channel.appendLine('SERVER: ' + line));
+      stdOut.forEach(line => serverOutputChannel.appendLine('stdout: ' + line));
       const port = stdOut
         .filter(line => line.startsWith('socket opened on port:'))
         .map(line => parseInt(line.replace(/\D*/g, '')))
         .find(() => true);
-      if (!port)
-      {
+      if (!port) {
         return;
       }
 
-      const serverOptions = () =>
-      {
+      const serverOptions: ServerOptions = () => {
         const socket = net.connect(port);
         const result = {
           writer: socket,
@@ -99,9 +97,9 @@ function activate(context)
         return Promise.resolve(result);
       };
 
-      const clientOptions = {
+      const clientOptions: LanguageClientOptions = {
         documentSelector: [{ scheme: 'file', language: 'Fuzion' }],
-
+        outputChannel: serverMessageOutputChannel
       };
 
       client = new LanguageClient(
@@ -110,25 +108,19 @@ function activate(context)
         clientOptions
       );
 
-      channel.appendLine('CLIENT: Fuzion Language Client started');
       client.start();
+      clientChannel.appendLine('stdout: Fuzion Language Client started');
     });
   }
 
 }
 
-function deactivate()
-{
-  if (channel)
-  {
-    channel.dispose();
-  }
-  if (server)
-  {
+function deactivate() {
+  // NYI dispose channels
+  if (server) {
     server.kill("SIGTERM");
   }
-  if (!client)
-  {
+  if (!client) {
     return undefined;
   }
   return client.stop();
