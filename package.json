@@ -41,10 +41,11 @@
         "vscode-languageclient": "^7.0.0"
     },
     "devDependencies": {
-        "@types/vscode": "^1.52.0",
-        "esbuild": "^0.12.25",
+        "@types/node": "^16.10.1",
+        "@types/vscode": "^1.60.0",
+        "esbuild": "^0.13.2",
         "ovsx": "^0.2.1",
-        "vsce": "^1.99.0"
+        "vsce": "^1.100.0"
     },
     "activationEvents": [
         "onLanguage:Fuzion"
