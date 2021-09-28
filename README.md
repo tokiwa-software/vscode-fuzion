@@ -23,6 +23,8 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 ![](images/lsp_references.png)
 ### Diagnostics
 ![](images/lsp_diagnostics.png)
+### Renaming
+![](images/lsp_rename.webp)
 
 ## Develop
 - Prerequisites: make, node, npm, java
