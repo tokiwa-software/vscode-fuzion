@@ -27,11 +27,11 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 ![](images/lsp_rename.webp)
 
 ## Develop
-- Prerequisites: make, node, npm, java
+- Prerequisites: make, node, npm, javac
 - git submodule update --init --recursive
 - start debugging in vscode
 - (optional) attach to java debugger at port 8000
 
 ## Build
-- Prerequisites: make, node, npm, java
-- make build-vsix
+- Prerequisites: make, node, npm, javac
+- npm run vscode:package

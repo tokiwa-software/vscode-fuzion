@@ -4,7 +4,7 @@
     "description": "Syntax highlighting for Fuzion Language",
     "version": "0.1.0",
     "engines": {
-        "vscode": "^1.53.0"
+        "vscode": "^1.60.0"
     },
     "categories": [
         "Programming Languages"
@@ -53,7 +53,7 @@
     "main": "main.js",
     "scripts": {
         "esbuild": "esbuild ./main.ts --bundle --outfile=main.js --external:vscode --format=cjs --platform=node --sourcemap",
-        "vscode:prepublish": "npm i && npx esbuild && make -C fuzion-lsp-server classes",
+        "vscode:prepublish": "npm i && npx esbuild && make -C fuzion-lsp-server jar",
         "vscode:package": "./node_modules/.bin/vsce package",
         "ovsx-publish": "echo 'npx ovsx publish fuzion-lang-${version}.vsix -p <token>'"
     }

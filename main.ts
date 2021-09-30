@@ -40,7 +40,8 @@ function activate(context) {
     const lspServer = debug
       ? {
         command: 'make',
-        arguments: [`debug`, `-s`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`],
+        arguments: [`debug`, `-s`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`
+      ],
         options: {
           env: {
             ...process.env,
@@ -50,10 +51,9 @@ function activate(context) {
           }
         }
       }
-      // NYI loose dependency on make and javac for production
       : {
-        command: 'make',
-        arguments: [`-s`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`, `-f`, `${context.extensionPath}/fuzion-lsp-server/Makefile`, `tcp`],
+        command: 'java',
+        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-jar`, `${context.extensionPath}/fuzion-lsp-server/out.jar`, `-tcp`],
         options: {
           env: {
             ...process.env,
