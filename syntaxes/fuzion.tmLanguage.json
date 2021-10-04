@@ -163,6 +163,10 @@
 				{
 					"name": "constant.character.escape",
 					"match": "\\\\."
+				},
+				{
+					"name": "variable.other",
+					"match": "\\$[A-Za-z0-9_]+"
 				}
 			]
 		},
