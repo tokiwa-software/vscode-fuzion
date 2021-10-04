@@ -131,27 +131,11 @@
 			"match": "\\b((0(x|X)[0-9a-fA-F_]*)|(([0-9_]+\\.?[0-9_]*)|(\\.[0-9_]+))((e|E|b|x|o|d)(\\+|-)?[0-9_]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
 			"name": "constant.numeric"
 		},
-		"symbols": {
-			"patterns": [
-				{
-					"name": "constant.numeric",
-					"match": "[,\\{\\}\\(\\)<>\\[\\]\\.=@:]"
-				}
-			]
-		},
 		"operators": {
 			"patterns": [
 				{
-					"name": "constant.numeric",
-					"match": "[+\\-\/*^.~`!@#$%&|:;<?=][+\\-\/*^.~`!@#$%&|:;<>?=]*"
-				}
-			]
-		},
-		"booleans": {
-			"patterns": [
-				{
-					"name": "string.other",
-					"match": "\\b(true|false)\\b"
+					"name": "keyword.other",
+					"match": "\\B(:=|=>|->)\\B"
 				}
 			]
 		},
