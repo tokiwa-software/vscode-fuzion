@@ -1,6 +1,6 @@
 import net from 'net';
 import vscode from 'vscode';
-import child_process from 'child_process';
+import child_process, { SpawnOptions } from 'child_process';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
 let client: LanguageClient;
@@ -40,27 +40,29 @@ function activate(context) {
     const lspServer = debug
       ? {
         command: 'make',
-        arguments: [`debug`, `-s`, `-C`, `${context.extensionPath}/fuzion-lsp-server/`
-      ],
+        arguments: [`debug`, `-s`],
         options: {
           env: {
             ...process.env,
             "PRECONDITIONS": "true",
             "POSTCONDITIONS": "true",
             "DEBUG": "true",
-          }
+          },
+          cwd: `${context.extensionPath}/fuzion-lsp-server/`
         }
       }
+
       : {
         command: 'java',
-        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-jar`, `${context.extensionPath}/fuzion-lsp-server/out.jar`, `-tcp`],
+        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-jar`, `./out.jar`, `-tcp`],
         options: {
           env: {
             ...process.env,
             "PRECONDITIONS": "false",
             "POSTCONDITIONS": "false",
             "DEBUG": "false",
-          }
+          },
+          cwd: `${context.extensionPath}/fuzion-lsp-server/`
         }
       };
 

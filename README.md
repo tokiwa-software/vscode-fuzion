@@ -35,3 +35,7 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 ## Build
 - Prerequisites: make, node, npm, javac
 - npm run vscode:package
+
+## Build docker openvscode-server
+- npm run vscode:package && docker build .
+- run with something like this: docker run -it --init -p 3000:3000 -v "<path_to_source_code>/home/workspace:cached"
