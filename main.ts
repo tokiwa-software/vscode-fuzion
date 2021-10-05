@@ -4,6 +4,8 @@ import child_process, { SpawnOptions } from 'child_process';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
 const restartTimeoutInSec = 10;
+const javaThreadStackSizeMB = 16;
+const javaMaxHeapMB = 256;
 let client: LanguageClient;
 let server: child_process.ChildProcessWithoutNullStreams;
 let clientChannel: vscode.OutputChannel;
@@ -110,7 +112,7 @@ function activate(context) {
 
       : {
         command: 'java',
-        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-jar`, `./out.jar`, `-tcp`],
+        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-Xss${javaThreadStackSizeMB}m`, `-Xmx${javaMaxHeapMB}m`, `-jar`, `./out.jar`, `-tcp`],
         options: {
           env: {
             ...process.env,
