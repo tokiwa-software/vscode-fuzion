@@ -3,6 +3,7 @@ import vscode from 'vscode';
 import child_process, { SpawnOptions } from 'child_process';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
+const restartTimeoutInSec = 10;
 let client: LanguageClient;
 let server: child_process.ChildProcessWithoutNullStreams;
 let clientChannel: vscode.OutputChannel;
@@ -20,6 +21,61 @@ function checkJava() {
     }
   }
   return true;
+}
+
+function start(lspServer) {
+  if (client) {
+    client.stop();
+  }
+  server = child_process.spawn(lspServer.command, lspServer.arguments, lspServer.options);
+
+  server.once("exit", (code) => {
+    if (code !== 0) {
+      vscode.window.showErrorMessage(`Fuzion language server crashed. Exit code: ${code}`);
+      vscode.window.showErrorMessage(`restarting in ${restartTimeoutInSec}sec.`);
+      setTimeout(() => { start(lspServer) }, restartTimeoutInSec * 1000)
+    }
+  });
+
+  server.stderr.on('data', function (data) {
+    const stdErr = data.toString().split('\n');
+    stdErr.forEach(line => serverOutputChannel.appendLine('stderr: ' + line));
+  });
+
+  server.stdout.on('data', function (data) {
+    const stdOut = data.toString().split('\n');
+    stdOut.forEach(line => serverOutputChannel.appendLine('stdout: ' + line));
+    const port = stdOut
+      .filter(line => line.startsWith('socket opened on port:'))
+      .map(line => parseInt(line.replace(/\D*/g, '')))
+      .find(() => true);
+    if (!port) {
+      return;
+    }
+
+    const serverOptions: ServerOptions = () => {
+      const socket = net.connect(port);
+      const result = {
+        writer: socket,
+        reader: socket
+      };
+      return Promise.resolve(result);
+    };
+
+    const clientOptions: LanguageClientOptions = {
+      documentSelector: [{ scheme: 'file', language: 'Fuzion' }],
+      outputChannel: serverMessageOutputChannel
+    };
+
+    client = new LanguageClient(
+      'Fuzion Language Server',
+      serverOptions,
+      clientOptions
+    );
+
+    client.start();
+    clientChannel.appendLine('stdout: Fuzion Language Client started');
+  });
 }
 
 function activate(context) {
@@ -65,54 +121,7 @@ function activate(context) {
           cwd: `${context.extensionPath}/fuzion-lsp-server/`
         }
       };
-
-    server = child_process.spawn(lspServer.command, lspServer.arguments, lspServer.options);
-
-    server.once("exit", (code) => {
-      if (code !== 0) {
-        vscode.window.showErrorMessage(`Fuzion language server crashed. Exit code: ${code}`);
-      }
-    });
-
-    server.stderr.on('data', function (data) {
-      const stdErr = data.toString().split('\n');
-      stdErr.forEach(line => serverOutputChannel.appendLine('stderr: ' + line));
-    });
-
-    server.stdout.on('data', function (data) {
-      const stdOut = data.toString().split('\n');
-      stdOut.forEach(line => serverOutputChannel.appendLine('stdout: ' + line));
-      const port = stdOut
-        .filter(line => line.startsWith('socket opened on port:'))
-        .map(line => parseInt(line.replace(/\D*/g, '')))
-        .find(() => true);
-      if (!port) {
-        return;
-      }
-
-      const serverOptions: ServerOptions = () => {
-        const socket = net.connect(port);
-        const result = {
-          writer: socket,
-          reader: socket
-        };
-        return Promise.resolve(result);
-      };
-
-      const clientOptions: LanguageClientOptions = {
-        documentSelector: [{ scheme: 'file', language: 'Fuzion' }],
-        outputChannel: serverMessageOutputChannel
-      };
-
-      client = new LanguageClient(
-        'Fuzion Language Server',
-        serverOptions,
-        clientOptions
-      );
-
-      client.start();
-      clientChannel.appendLine('stdout: Fuzion Language Client started');
-    });
+    start(lspServer);
   }
 
 }
