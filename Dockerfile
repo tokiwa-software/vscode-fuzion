@@ -16,7 +16,8 @@ RUN unzip /home/fuzion-lang-0.1.0.vsix -d /tmp/dir
 RUN mv /tmp/dir/extension/* /home/openvscode-server-v1.60.2-linux-x64/extensions/fuzion/
 RUN find /home/openvscode-server-v1.60.2-linux-x64/extensions/fuzion/
 
-COPY docker_on_unused_kill.sh /home/
-CMD nohup bash -c "while true; do sleep 60; /home/docker_on_unused_kill.sh; done" &
 
 USER openvscode-server
+
+COPY entrypoint.sh /home/
+ENTRYPOINT /home/entrypoint.sh
