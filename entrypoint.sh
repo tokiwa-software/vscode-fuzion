@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#
+# entrypoint script for docker container
+# - starts vscode server
+# - checks every 60s if container is still in use
+# - shuts down if container is not in use anymore
+#
+
 ${OPENVSCODE_SERVER_ROOT}/server.sh &
 
 while true
