@@ -17,6 +17,6 @@ RUN mv /tmp/dir/extension/* /home/openvscode-server-v1.60.2-linux-x64/extensions
 RUN find /home/openvscode-server-v1.60.2-linux-x64/extensions/fuzion/
 
 COPY docker_on_unused_kill.sh /home/
-HEALTHCHECK --interval=60s CMD /home/docker_on_unused_kill.sh
+CMD nohup bash -c "while true; do sleep 60; /home/docker_on_unused_kill.sh; done" &
 
 USER openvscode-server
