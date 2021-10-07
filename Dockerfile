@@ -24,5 +24,7 @@ ENV FUZION_JAVA_CLASSPATH="${FUZION_HOME}/../../out.jar"
 
 COPY entrypoint.sh /home/
 COPY Hello.md /home/workspace/
+COPY fuzion-lsp-server/fuzion/tests/hello/HelloWorld.fz /home/workspace/
+COPY fuzion-lsp-server/fuzion/examples/complex/pythagoreanTriple.fz /home/workspace/
 
 ENTRYPOINT /home/entrypoint.sh
