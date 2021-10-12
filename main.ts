@@ -14,13 +14,11 @@ let serverOutputChannel: vscode.OutputChannel;
 
 function checkJava() {
   try {
-    child_process.execSync('java').toString();
+    child_process.execSync('java -version').toString();
   }
   catch (error) {
-    if (error.status !== 1) {
-      vscode.window.showErrorMessage('Please install Java and make sure it\'s in PATH.');
-      return false;
-    }
+    vscode.window.showErrorMessage('Please install Java and make sure it\'s in PATH.');
+    return false;
   }
   return true;
 }
