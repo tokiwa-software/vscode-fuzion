@@ -118,7 +118,7 @@ function activate(context) {
 
       : {
         command: 'java',
-        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-Xss${javaThreadStackSizeMB}m`, `-Xmx${javaMaxHeapMB}m`, `-jar`, `./out.jar`, `-tcp`],
+        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`,`-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-Xmx${javaMaxHeapMB}m`, `-jar`, `./out.jar`, `-tcp`],
         options: {
           env: {
             ...process.env,
