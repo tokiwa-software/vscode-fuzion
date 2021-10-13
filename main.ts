@@ -3,7 +3,9 @@ import vscode from 'vscode';
 import child_process, { SpawnOptions } from 'child_process';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
-const restartTimeoutInSec = 10;
+const restartTimeoutInSec = 3;
+let startCount = 0;
+const maxRestartCount = 10;
 const javaThreadStackSizeMB = 16;
 const javaMaxHeapMB = 256;
 let client: LanguageClient;
@@ -27,6 +29,12 @@ function start(lspServer) {
   if (client) {
     client.stop();
   }
+
+  startCount++;
+  if (maxRestartCount < startCount) {
+    return;
+  }
+
   server = child_process.spawn(lspServer.command, lspServer.arguments, lspServer.options);
 
   server.once("exit", (code) => {
