@@ -16,7 +16,6 @@ RUN unzip /home/fuzion-lang-0.1.0.vsix -d /tmp/dir
 RUN mv /tmp/dir/extension/* /home/openvscode-server-v1.60.2-linux-x64/extensions/fuzion/
 RUN find /home/openvscode-server-v1.60.2-linux-x64/extensions/fuzion/
 
-USER openvscode-server
 
 ENV FUZION_HOME="/home/openvscode-server-v1.60.2-linux-x64/extensions/fuzion/fuzion-lsp-server/fuzion/build"
 ENV PATH="${FUZION_HOME}/bin:${PATH}"
@@ -26,5 +25,8 @@ COPY entrypoint.sh /home/
 COPY Hello.md /home/workspace/
 COPY fuzion-lsp-server/fuzion/tests/hello/HelloWorld.fz /home/workspace/
 COPY fuzion-lsp-server/fuzion/examples/complex/pythagoreanTriple.fz /home/workspace/
+RUN chown -R openvscode-server:openvscode-server /home/workspace
+
+USER openvscode-server
 
 ENTRYPOINT /home/entrypoint.sh
