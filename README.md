@@ -13,18 +13,30 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 
 ### Syntax Highlighting
 ![Preview](images/vscode.png)
+
 ### Definition
 ![](images/lsp_definition.png)
+
 ### Completion
 ![](images/lsp_completion.png)
+
 ### Hover
 ![](images/lsp_hover.png)
+
 ### References
 ![](images/lsp_references.png)
+
 ### Diagnostics
 ![](images/lsp_diagnostics.png)
+
 ### Renaming
 ![](images/lsp_rename.webp)
+
+### Evaluation
+![](images/lsp_evaluate_file.png)
+
+### Syntax Tree
+![](images/lsp_show_syntax_tree.png)
 
 ## Develop
 - Prerequisites: make, node, npm, javac
