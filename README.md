@@ -38,6 +38,9 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 ### Syntax Tree
 ![](images/lsp_show_syntax_tree.png)
 
+### Outline
+![](images/lsp_document_symbols.png)
+
 ## Develop
 - Prerequisites: make, node, npm, javac
 - git submodule update --init --recursive
