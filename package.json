@@ -4,13 +4,16 @@
     "description": "Syntax highlighting for Fuzion Language",
     "version": "0.1.0",
     "engines": {
-        "vscode": "^1.53.0"
+        "vscode": "^1.60.0"
     },
     "categories": [
         "Programming Languages"
     ],
-    "icon": "images/banner.png",
-    "repository": "https://github.com/Ivo-Balbaert/vscode-fuzion",
+    "icon": "images/fuzion_logo_196.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Ivo-Balbaert/vscode-fuzion"
+    },
     "publisher": "Ivo-Balbaert",
     "contributes": {
         "languages": [
@@ -33,5 +36,26 @@
                 "path": "./syntaxes/fuzion.tmLanguage.json"
             }
         ]
+    },
+    "dependencies": {
+        "vscode-languageclient": "^7.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^16.10.1",
+        "@types/vscode": "^1.60.0",
+        "esbuild": "^0.13.2",
+        "ovsx": "^0.2.1",
+        "vsce": "^1.100.0"
+    },
+    "activationEvents": [
+        "onLanguage:Fuzion"
+    ],
+    "main": "main.js",
+    "scripts": {
+        "esbuild": "esbuild ./main.ts --bundle --outfile=main.js --external:vscode --format=cjs --platform=node --sourcemap",
+        "###comment: vscode:prepublish is called automatically by vscode:package": "",
+        "vscode:prepublish": "npm i && npm run esbuild && make -C fuzion-lsp-server jar",
+        "vscode:package": "./node_modules/.bin/vsce package",
+        "ovsx-publish": "echo 'npx ovsx publish fuzion-lang-${version}.vsix -p <token>'"
     }
 }
