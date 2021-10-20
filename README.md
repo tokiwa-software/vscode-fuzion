@@ -1,10 +1,10 @@
-# Fuzion extension for Visual Studio Code
+# <img src="images/logo.svg" alt="fuzion logo" width="25" /> Fuzion extension for Visual Studio Code
 
 This is a Visual Studio Code extension to support development in the [Fuzion Programming Language](https://flang.dev).
-![Fuzion logo](images/fuzion_logo_196.png)
 
 ## Install
 - https://marketplace.visualstudio.com/items?itemName=tokiwa-software.fuzion-lang
+- https://open-vsx.org/extension/tokiwa-software/fuzion-lang
 
 ## Develop
 - Prerequisites: make, node, npm, javac
