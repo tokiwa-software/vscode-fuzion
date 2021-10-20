@@ -2,7 +2,7 @@
     "name": "fuzion-lang",
     "displayName": "Fuzion",
     "description": "Syntax highlighting for Fuzion Language",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "engines": {
         "vscode": "^1.60.0"
     },
