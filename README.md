@@ -3,6 +3,9 @@
 This is a Visual Studio Code extension to support development in the [Fuzion Programming Language](https://flang.dev).
 ![Fuzion logo](images/fuzion_logo_196.png)
 
+## Install
+- https://marketplace.visualstudio.com/items?itemName=tokiwa-software.fuzion-lang
+
 ## Develop
 - Prerequisites: make, node, npm, javac
 - git submodule update --init --recursive
