@@ -1,6 +1,6 @@
 import net from 'net';
 import vscode from 'vscode';
-import child_process, { SpawnOptions } from 'child_process';
+import child_process from 'child_process';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
 const restartTimeoutInSec = 3;
