@@ -1,10 +1,17 @@
-# vscode-fuzion README
+# Fuzion extension for Visual Studio Code
 
 This is a Visual Studio Code extension to support development in the [Fuzion Programming Language](https://flang.dev).
 ![Fuzion logo](images/fuzion_logo_196.png)
 
+## Develop
+- Prerequisites: make, node, npm, javac
+- git submodule update --init --recursive
+- start debugging in vscode
+- (optional) attach to java debugger at port 8000
 
-To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o folder into your <user home>/.vscode/extensions folder and restart VS Code.
+## Build
+- Prerequisites: make, node, npm, javac
+- npm run vscode:package
 
 ## Features
 
@@ -41,12 +48,3 @@ To start using the extension, download, unzip and copy the vscode-fuzion-n.m.o f
 ### Outline
 ![](images/lsp_document_symbols.png)
 
-## Develop
-- Prerequisites: make, node, npm, javac
-- git submodule update --init --recursive
-- start debugging in vscode
-- (optional) attach to java debugger at port 8000
-
-## Build
-- Prerequisites: make, node, npm, javac
-- npm run vscode:package
