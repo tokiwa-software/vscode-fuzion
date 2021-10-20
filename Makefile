@@ -1,4 +1,10 @@
-build-vsix:
+clean:
+	make -C fuzion-lsp-server clean
+	rm -f *.vsix
+	rm -f *.js
+	rm -f *.js.map
+
+build-vsix: clean
 	npm i
 	npm run vscode:package
 
