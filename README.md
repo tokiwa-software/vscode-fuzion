@@ -2,7 +2,7 @@
 
 This is a Visual Studio Code extension to support development in the [Fuzion Programming Language](https://flang.dev).
 
-## Install
+## Install (Java 17 required)
 - https://marketplace.visualstudio.com/items?itemName=tokiwa-software.fuzion-lang
 - https://open-vsx.org/extension/tokiwa-software/fuzion-lang
 
