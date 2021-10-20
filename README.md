@@ -1,4 +1,4 @@
-# <img src="images/logo.svg" alt="fuzion logo" width="25" /> Fuzion extension for Visual Studio Code
+# ![fuzion_logo_25.png](images/fuzion_logo_25.png) Fuzion extension for Visual Studio Code
 
 This is a Visual Studio Code extension to support development in the [Fuzion Programming Language](https://flang.dev).
 
