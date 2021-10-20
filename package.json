@@ -57,5 +57,10 @@
         "vscode:prepublish": "npm i && npm run esbuild && make -C fuzion-lsp-server jar",
         "vscode:package": "./node_modules/.bin/vsce package",
         "ovsx-publish": "echo 'npx ovsx publish fuzion-lang-${version}.vsix -p <token>'"
+    },
+    "__metadata": {
+        "id": "299266fa-6d15-42d9-aac6-0cbe70c9925b",
+        "publisherDisplayName": null,
+        "publisherId": "348bd022-7210-4d7d-a705-96a49709926b"
     }
 }
