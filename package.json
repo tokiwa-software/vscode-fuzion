@@ -12,9 +12,9 @@
     "icon": "images/fuzion_logo_196.png",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Ivo-Balbaert/vscode-fuzion"
+        "url": "https://github.com/tokiwa-software/vscode-fuzion"
     },
-    "publisher": "Ivo-Balbaert",
+    "publisher": "tokiwa-software",
     "contributes": {
         "languages": [
             {
