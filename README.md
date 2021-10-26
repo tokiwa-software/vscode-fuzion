@@ -22,32 +22,34 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 - Language Server Client
 
 ### Syntax Highlighting
-![Preview](images/vscode.png)
+![Syntax Highlighting](images/syntax_highlighting.png)
 
 ### Definition
-![](images/lsp_definition.png)
+![Definition](images/lsp_definition.png)
 
 ### Completion
-![](images/lsp_completion.png)
+![Completion](images/lsp_completion.png)
 
 ### Hover
-![](images/lsp_hover.png)
+![Hover](images/lsp_hover.png)
 
 ### References
-![](images/lsp_references.png)
+![References](images/lsp_references.png)
 
 ### Diagnostics
-![](images/lsp_diagnostics.png)
+![Diagnostics](images/lsp_diagnostics.png)
 
 ### Renaming
-![](images/lsp_rename.webp)
+![Renaming](images/lsp_rename.webp)
 
 ### Evaluation
-![](images/lsp_evaluate_file.png)
+![Evaluation](images/lsp_evaluate_file.webp)
 
 ### Syntax Tree
-![](images/lsp_show_syntax_tree.png)
+![Syntax Tree](images/lsp_show_syntax_tree.webp)
 
 ### Outline
-![](images/lsp_document_symbols.png)
+![Outline](images/lsp_document_symbols.png)
 
+### Signature Help
+![Signature Help](images/lsp_signature_help.png)
