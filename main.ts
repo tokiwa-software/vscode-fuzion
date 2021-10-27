@@ -7,7 +7,6 @@ const restartTimeoutInSec = 3;
 let startCount = 0;
 const maxRestartCount = 10;
 const javaThreadStackSizeMB = 16;
-const javaMaxHeapMB = 256;
 let client: LanguageClient;
 let server: child_process.ChildProcessWithoutNullStreams;
 let clientChannel: vscode.OutputChannel;
@@ -118,7 +117,7 @@ function activate(context) {
 
       : {
         command: 'java',
-        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`,`-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-Xmx${javaMaxHeapMB}m`, `-jar`, `./out.jar`, `-tcp`],
+        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`,`-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./out.jar`, `-tcp`],
         options: {
           env: {
             ...process.env,
