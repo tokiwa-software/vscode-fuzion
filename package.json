@@ -1,13 +1,15 @@
 {
     "name": "fuzion-lang",
     "displayName": "Fuzion",
-    "description": "Syntax highlighting for Fuzion Language",
+    "description": "Supports the development in the Fuzion programming language",
     "version": "0.2.0",
     "engines": {
         "vscode": "^1.60.0"
     },
     "categories": [
-        "Programming Languages"
+        "Linters",
+        "Programming Languages",
+        "Snippets"
     ],
     "icon": "images/fuzion_logo_196.png",
     "repository": {
