@@ -102,17 +102,13 @@ function activate(context) {
   if (transportKind === TransportKind.socket) {
     const lspServer = debug
       ? {
-        // explicitly use bash here which works around a problem on windows
         command: 'bash',
-        arguments: [`-c`, `make`,  `-s`, `debug`],
+        arguments: [`./start_lsp_debug.sh`],
         options: {
           env: {
             ...process.env,
-            "PRECONDITIONS": "true",
-            "POSTCONDITIONS": "true",
-            "DEBUG": "true",
           },
-          cwd: `${context.extensionPath}/fuzion-lsp-server/`
+          cwd: `${context.extensionPath}/`
         }
       }
 
