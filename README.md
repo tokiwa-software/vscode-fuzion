@@ -7,14 +7,15 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 - https://open-vsx.org/extension/tokiwa-software/fuzion-lang
 
 ## Develop
-- Prerequisites: make, node, npm, javac
-- git submodule update --init --recursive
+- Prerequisites: `make`, `node`, `npm`, `javac`
+- `git submodule update --init --recursive`
+- `npm i`
 - start debugging in vscode
 - (optional) attach to java debugger at port 8000
 
 ## Build
-- Prerequisites: make, node, npm, javac
-- npm run vscode:package
+- Prerequisites: `make`, `node`, `npm`, `javac`
+- `npm run vscode:package`
 
 ## Features
 
@@ -59,7 +60,7 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 ---
 Problem: tar EPERM: operation not permitted, futime
 
-Workaround: sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata,uid=1000,gid=1000,umask=22,fmask=111
+Workaround: `sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata,uid=1000,gid=1000,umask=22,fmask=111`
 
 ---
 Problem: when starting debugging session: esbuild not found
