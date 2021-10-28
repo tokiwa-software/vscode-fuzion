@@ -102,8 +102,9 @@ function activate(context) {
   if (transportKind === TransportKind.socket) {
     const lspServer = debug
       ? {
-        command: 'make',
-        arguments: [`debug`, `-s`],
+        // explicitly use bash here which works around a problem on windows
+        command: 'bash',
+        arguments: [`-c`, `make`,  `-s`, `debug`],
         options: {
           env: {
             ...process.env,
