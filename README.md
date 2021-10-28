@@ -53,3 +53,17 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 
 ### Signature Help
 ![Signature Help](images/lsp_signature_help.png)
+
+## Known Windows (wsl) problems/workaround
+
+---
+Problem: tar EPERM: operation not permitted, futime
+
+Workaround: sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata,uid=1000,gid=1000,umask=22,fmask=111
+
+---
+Problem: when starting debugging session: esbuild not found
+
+Workaround: vscode setting: "terminal.integrated.defaultProfile.windows": "Ubuntu-20.04 (WSL)"
+
+---
