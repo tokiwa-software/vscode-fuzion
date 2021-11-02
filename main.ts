@@ -1,8 +1,11 @@
 import net from 'net';
-import vscode from 'vscode';
+import fs from 'fs';
+import vscode, { ExtensionContext } from 'vscode';
 import child_process from 'child_process';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
+const isWindows = process.platform === "win32";
+let isDebug = false;
 const restartTimeoutInSec = 3;
 let startCount = 0;
 const maxRestartCount = 10;
@@ -85,9 +88,9 @@ function start(lspServer) {
   });
 }
 
-function activate(context) {
+function activate(context: ExtensionContext) {
   const transportKind = TransportKind.socket;
-  const debug = context.extensionMode == vscode.ExtensionMode.Development;
+  isDebug = context.extensionMode == vscode.ExtensionMode.Development;
 
   clientChannel = vscode.window.createOutputChannel("vscode-fuzion");
   serverMessageOutputChannel = vscode.window.createOutputChannel("vscode-fuzion_server_message");
@@ -100,34 +103,56 @@ function activate(context) {
   }
 
   if (transportKind === TransportKind.socket) {
-    const lspServer = debug
-      ? {
-        command: 'bash',
-        arguments: [`./start_lsp_debug.sh`],
-        options: {
-          env: {
-            ...process.env,
-          },
-          cwd: `${context.extensionPath}/`
-        }
-      }
+    start(getSpawnArgs(context));
+  }
+}
 
-      : {
-        command: 'java',
-        arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`,`-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./out.jar`, `-tcp`],
-        options: {
-          env: {
-            ...process.env,
-            "PRECONDITIONS": "false",
-            "POSTCONDITIONS": "false",
-            "DEBUG": "false",
-          },
-          cwd: `${context.extensionPath}/fuzion-lsp-server/`
-        }
-      };
-    start(lspServer);
+function getSpawnArgs(context: ExtensionContext) {
+  if (!isDebug) {
+    return {
+      command: 'java',
+      arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./out.jar`, `-tcp`],
+      options: {
+        env: {
+          ...process.env,
+          "PRECONDITIONS": "false",
+          "POSTCONDITIONS": "false",
+          "DEBUG": "false",
+        },
+        cwd: `${context.extensionPath}/fuzion-lsp-server/`
+      }
+    };
   }
 
+  function prependEnvPath(path){
+    if(fs.existsSync(path)){
+      process.env.PATH = `${path};${process.env.PATH}`
+    }
+  }
+  // on windows we are using msys2 for now to start debugging.
+  // may consider adding support for powershell but Makefile
+  // has to be "fixed" to work in powershell first
+  if(isWindows){
+    prependEnvPath('C:\\tools\\msys64\\usr\\bin');
+    prependEnvPath('C:\\msys64\\usr\\bin');
+    const makeVersion = child_process.execSync('make -v');
+    if(!makeVersion.includes('x86_64-pc-msys')){
+      throw 'make flavour not supported. use msys2 make. (pacman -S make)';
+    }
+  }
+  return {
+    command: 'make',
+    arguments: [`-s`, `debug`],
+    options: {
+      env: {
+        ...process.env,
+        "PRECONDITIONS": "true",
+        "POSTCONDITIONS": "true",
+        "DEBUG": "true",
+      },
+      cwd: `${context.extensionPath}/fuzion-lsp-server/`
+    }
+  };
 }
 
 function deactivate() {
