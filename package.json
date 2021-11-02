@@ -57,7 +57,7 @@
         "esbuild": "esbuild ./main.ts --bundle --outfile=main.js --external:vscode --format=cjs --platform=node --sourcemap",
         "###comment: vscode:prepublish is called automatically by vscode:package": "",
         "vscode:prepublish": "npm i && npm run esbuild && make -C fuzion-lsp-server jar",
-        "vscode:package": "./node_modules/.bin/vsce package",
+        "vscode:package": "npx vsce package",
         "ovsx-publish": "echo 'npx ovsx publish fuzion-lang-${version}.vsix -p <token>'"
     },
     "__metadata": {
