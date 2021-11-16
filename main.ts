@@ -1,6 +1,7 @@
 import net from 'net';
 import fs from 'fs';
-import vscode, { ExtensionContext } from 'vscode';
+import os from 'os';
+import vscode, { ExtensionContext, OutputChannel } from 'vscode';
 import child_process from 'child_process';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
@@ -25,6 +26,39 @@ function checkJava() {
     return false;
   }
   return true;
+}
+
+class OutputChannelWriter implements OutputChannel {
+  constructor(private outputChannel: OutputChannel) {
+    this.name = 'wrapper_' + outputChannel.name;
+  }
+  name: string;
+  append(value: string): void {
+    if (isDebug) {
+      fs.appendFileSync(os.tmpdir() + `/${this.outputChannel.name}.log`, value);
+    }
+    this.outputChannel.append(value);
+  }
+  appendLine(value: string): void {
+    if (isDebug) {
+      fs.appendFileSync(os.tmpdir() + `/${this.outputChannel.name}.log`, value + '\n')
+    }
+    this.outputChannel.appendLine(value);
+  }
+  clear(): void {
+    this.outputChannel.clear();
+  }
+  show(preserveFocus?: boolean): void;
+  show(column?: vscode.ViewColumn, preserveFocus?: boolean): void;
+  show(column?: any, preserveFocus?: any): void {
+    throw new Error('Method not implemented.');
+  }
+  hide(): void {
+    throw new Error('Method not implemented.');
+  }
+  dispose(): void {
+    this.outputChannel.dispose();
+  }
 }
 
 function start(lspServer) {
@@ -74,7 +108,7 @@ function start(lspServer) {
 
     const clientOptions: LanguageClientOptions = {
       documentSelector: [{ scheme: 'file', language: 'Fuzion' }],
-      outputChannel: serverMessageOutputChannel
+      outputChannel: new OutputChannelWriter(serverMessageOutputChannel)
     };
 
     client = new LanguageClient(
@@ -124,19 +158,19 @@ function getSpawnArgs(context: ExtensionContext) {
     };
   }
 
-  function prependEnvPath(path){
-    if(fs.existsSync(path)){
+  function prependEnvPath(path) {
+    if (fs.existsSync(path)) {
       process.env.PATH = `${path};${process.env.PATH}`
     }
   }
   // on windows we are using msys2 for now to start debugging.
   // may consider adding support for powershell but Makefile
   // has to be "fixed" to work in powershell first
-  if(isWindows){
+  if (isWindows) {
     prependEnvPath('C:\\tools\\msys64\\usr\\bin');
     prependEnvPath('C:\\msys64\\usr\\bin');
     const makeVersion = child_process.execSync('make -v');
-    if(!makeVersion.includes('x86_64-pc-msys')){
+    if (!makeVersion.includes('x86_64-pc-msys')) {
       throw 'make flavour not supported. use msys2 make. (pacman -S make)';
     }
   }
