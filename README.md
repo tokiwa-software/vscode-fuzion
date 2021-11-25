@@ -33,6 +33,11 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 - `make run_tests`
 - NOTE: this should work in both wsl and msys2_shell.
 
+## Settings
+- fuzion.java.modules
+  - list of java modules the fuzion language server should use
+  - example: ["java.base"]
+
 ## Features
 
 - Syntax Highlighting for `.fz` files

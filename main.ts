@@ -1,8 +1,8 @@
-import net from 'net';
+import child_process from 'child_process';
 import fs from 'fs';
+import net from 'net';
 import os from 'os';
 import vscode, { ExtensionContext, OutputChannel } from 'vscode';
-import child_process from 'child_process';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
 const isWindows = process.platform === "win32";

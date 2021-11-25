@@ -37,7 +37,28 @@
                 "scopeName": "source.fz",
                 "path": "./syntaxes/fuzion.tmLanguage.json"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "fuzion",
+            "type": "object",
+            "properties": {
+                "fuzion.java.modules": {
+                    "type": [
+                        "array"
+                    ],
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "java.base",
+                            "java.datatransfer",
+                            "java.desktop",
+                            "java.xml"
+                        ]
+                    },
+                    "description": "Which java modules to enable"
+                }
+            }
+        }
     },
     "dependencies": {
         "vscode-languageclient": "^7.0.0"
