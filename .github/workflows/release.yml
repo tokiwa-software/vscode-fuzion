@@ -23,7 +23,7 @@ jobs:
         node-version: '16'
         cache: 'npm'
 
-    - uses: gagle/package-version@v1
+    - uses: gagle/package-version@v1.0.0
       id: package-version
 
     - name: update submodule
