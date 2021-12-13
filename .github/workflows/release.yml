@@ -25,7 +25,8 @@ jobs:
 
     - name: package version
       id: package-version
-      run: echo ::set-output name=version::$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json)
+      run: >
+        echo ::set-output name=version::$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json)
 
     - name: update submodule
       run: git submodule update --init --recursive
