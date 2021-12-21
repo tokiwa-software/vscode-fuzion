@@ -1,8 +1,8 @@
 name: github release
 
 on:
-  schedule:
-  - cron: "0 4 * * 0"
+  # schedule:
+  # - cron: "0 4 * * 0"
   workflow_dispatch:
 
 jobs:
