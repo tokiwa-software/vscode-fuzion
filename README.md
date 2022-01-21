@@ -76,6 +76,9 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 ### Signature Help
 ![Signature Help](images/lsp_signature_help.png)
 
+### Call Graph
+![Call Graph](images/lsp_code_lens_call_graph.png)
+
 ## Known Windows (wsl) problems/workaround
 
 ---
