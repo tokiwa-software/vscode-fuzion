@@ -115,7 +115,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control",
-					"match": "\\b(abstract|check|const|do|else|ensure|export|for|fun|if|in|index|infix|intrinsic|inv|invariant|is|lazy|leaf|loop|match|old|post|postfix|pre|prefix|private|protected|public|redef|redefine|ref|require|set|synchronized|ternary|then|this|until|value|var|variant|while)\\b"
+					"match": "\\b(abstract|check|const|do|else|ensure|export|for|fun|if|in|index|infix|intrinsic|inv|invariant|is|lazy|leaf|loop|match|old|post|postfix|pre|prefix|private|protected|public|redef|redefine|ref|require|result|set|synchronized|ternary|then|this|until|value|var|variant|while)\\b"
 				}
 			]
 		},
