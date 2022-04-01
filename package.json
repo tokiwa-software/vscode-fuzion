@@ -2,7 +2,7 @@
     "name": "fuzion-lang",
     "displayName": "Fuzion",
     "description": "Supports the development in the Fuzion programming language",
-    "version": "0.071.0",
+    "version": "0.71.0",
     "engines": {
         "vscode": "^1.60.0"
     },
