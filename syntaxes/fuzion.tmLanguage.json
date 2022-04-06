@@ -1,159 +1,159 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Fuzion",
-	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#doubleQuoteStrings"
-		},
-		{
-			"include": "#singleQuoteStrings"
-		},
-		{
-			"include": "#comment"
-		},
-		{
-			"include": "#importKeywords"
-		},
-		{
-			"include": "#booleans"
-		},
-		{
-			"include": "#numbers"
-		},
-		{
-			"include": "#operators"
-		},
-		{
-			"include": "#symbols"
-		}
-	],
-	"repository": {
-		"comment": {
-			"patterns": [
-				{
-					"name": "comment.line",
-					"begin": "(#)(.*)",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.definition.comment"
-						},
-						"1": {
-							"name": "comment.content"
-						}
-					},
-					"end": "(?=$)",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.comment"
-						}
-					}
-				},
-				{
-					"name": "comment.block.documentation",
-					"begin": "/\\*\\*(?!/)",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.definition.comment"
-						}
-					},
-					"end": "\\*/",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.comment"
-						}
-					}
-				},
-				{
-					"name": "comment.block",
-					"begin": "(/\\*)(?:\\s*((@)internal)(?=\\s|(\\*/)))?",
-					"beginCaptures": {
-						"1": {
-							"name": "punctuation.definition.comment"
-						},
-						"2": {
-							"name": "storage.type.internaldeclaration"
-						},
-						"3": {
-							"name": "punctuation.decorator.internaldeclaration"
-						}
-					},
-					"end": "\\*/",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.comment"
-						}
-					}
-				},
-				{
-					"begin": "(^[ \\t]+)?((//)(?:\\s*((@)internal)(?=\\s|$))?)",
-					"beginCaptures": {
-						"1": {
-							"name": "punctuation.whitespace.comment.leading"
-						},
-						"2": {
-							"name": "comment.line.double-slash"
-						},
-						"3": {
-							"name": "punctuation.definition.comment"
-						},
-						"4": {
-							"name": "storage.type.internaldeclaration"
-						},
-						"5": {
-							"name": "punctuation.decorator.internaldeclaration"
-						}
-					},
-					"end": "(?=$)",
-					"contentName": "comment.line.double-slash"
-				}
-			]
-		},
-		"keywords": {
-			"patterns": [
-				{
-					"name": "keyword.control",
-					"match": "\\b(abstract|check|const|do|else|ensure|export|for|fun|if|in|index|infix|intrinsic|inv|invariant|is|lazy|leaf|loop|match|old|post|postfix|pre|prefix|private|protected|public|redef|redefine|ref|require|result|set|synchronized|ternary|then|this|until|value|var|variant|while)\\b"
-				}
-			]
-		},
-		"importKeywords": {
-			"patterns": [
-				{
-					"name": "variable.language",
-					"match": "\\\\b"
-				}
-			]
-		},
-		"numbers": {
-			"match": "\\b((0(x|X)[0-9a-fA-F_]*)|(([0-9_]+\\.?[0-9_]*)|(\\.[0-9_]+))((e|E|b|x|o|d)(\\+|-)?[0-9_]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
-			"name": "constant.numeric"
-		},
-		"operators": {
-			"patterns": [
-				{
-					"name": "keyword.other",
-					"match": "\\B(:=|=>|->)\\B"
-				}
-			]
-		},
-		"doubleQuoteStrings": {
-			"name": "string.quoted.double",
-			"begin": "(\"|\\})",
-			"end": "(\"|\\{)",
-			"patterns": [
-				{
-					"name": "constant.character.escape",
-					"match": "\\\\."
-				},
-				{
-					"name": "variable.other",
-					"match": "\\$[A-Za-z0-9_]+"
-				}
-			]
-		}
-	},
-	"scopeName": "source.fz"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Fuzion",
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#doubleQuoteStrings"
+    },
+    {
+      "include": "#singleQuoteStrings"
+    },
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#importKeywords"
+    },
+    {
+      "include": "#booleans"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#symbols"
+    }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line",
+          "begin": "(#)(.*)",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment"
+            },
+            "1": {
+              "name": "comment.content"
+            }
+          },
+          "end": "(?=$)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment"
+            }
+          }
+        },
+        {
+          "name": "comment.block.documentation",
+          "begin": "/\\*\\*(?!/)",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment"
+            }
+          }
+        },
+        {
+          "name": "comment.block",
+          "begin": "(/\\*)(?:\\s*((@)internal)(?=\\s|(\\*/)))?",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.comment"
+            },
+            "2": {
+              "name": "storage.type.internaldeclaration"
+            },
+            "3": {
+              "name": "punctuation.decorator.internaldeclaration"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment"
+            }
+          }
+        },
+        {
+          "begin": "(^[ \\t]+)?((//)(?:\\s*((@)internal)(?=\\s|$))?)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading"
+            },
+            "2": {
+              "name": "comment.line.double-slash"
+            },
+            "3": {
+              "name": "punctuation.definition.comment"
+            },
+            "4": {
+              "name": "storage.type.internaldeclaration"
+            },
+            "5": {
+              "name": "punctuation.decorator.internaldeclaration"
+            }
+          },
+          "end": "(?=$)",
+          "contentName": "comment.line.double-slash"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "\\b(abstract|check|const|do|else|ensure|export|for|fun|if|in|index|infix|intrinsic|inv|invariant|is|lazy|leaf|loop|match|old|post|postfix|pre|prefix|private|protected|public|redef|redefine|ref|require|result|set|synchronized|ternary|then|this|until|value|var|variant|while)\\b"
+        }
+      ]
+    },
+    "importKeywords": {
+      "patterns": [
+        {
+          "name": "variable.language",
+          "match": "\\\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "match": "\\b((0(x|X)[0-9a-fA-F_]*)|(([0-9_]+\\.?[0-9_]*)|(\\.[0-9_]+))((e|E|b|x|o|d)(\\+|-)?[0-9_]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
+      "name": "constant.numeric"
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.other",
+          "match": "\\B(:=|=>|->)\\B"
+        }
+      ]
+    },
+    "doubleQuoteStrings": {
+      "name": "string.quoted.double",
+      "begin": "(\"|\\})",
+      "end": "(\"|\\{)",
+      "patterns": [
+        {
+          "name": "constant.character.escape",
+          "match": "\\\\."
+        },
+        {
+          "name": "variable.other",
+          "match": "\\$[A-Za-z0-9_]+"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.fz"
 }
