@@ -79,6 +79,9 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 ### Call Graph
 ![Call Graph](images/lsp_code_lens_call_graph.png)
 
+### Inlay Hints
+![Inlay Hints](images/lsp_inlay_hints.png)
+
 ## Known Windows (wsl) problems/workaround
 
 ---
