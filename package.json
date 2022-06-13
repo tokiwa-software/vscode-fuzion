@@ -58,6 +58,11 @@
                     "description": "Which java modules to enable"
                 }
             }
+        },
+        "configurationDefaults": {
+            "[Fuzion]": {
+                "editor.wordBasedSuggestions": false
+            }
         }
     },
     "dependencies": {
