@@ -31,13 +31,6 @@
                 "configuration": "./language-configuration.json"
             }
         ],
-        "grammars": [
-            {
-                "language": "Fuzion",
-                "scopeName": "source.fz",
-                "path": "./syntaxes/fuzion.tmLanguage.json"
-            }
-        ],
         "configuration": {
             "title": "fuzion",
             "type": "object",
@@ -61,7 +54,21 @@
         },
         "configurationDefaults": {
             "[Fuzion]": {
-                "editor.wordBasedSuggestions": false
+                "editor.wordBasedSuggestions": false,
+                "editor.semanticHighlighting.enabled": true
+            },
+            "editor.semanticTokenColorCustomizations": {
+                "rules": {
+                    "operator": {
+                        "fontStyle": "bold"
+                    },
+                    "namespace": {
+                        "fontStyle": "bold"
+                    },
+                    "comment": {
+                        "italic": true
+                    }
+                }
             }
         }
     },
