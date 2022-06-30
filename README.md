@@ -43,7 +43,7 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 - Syntax Highlighting for `.fz` files
 - Language Server Client
 
-### Syntax Highlighting
+### Syntax Highlighting (via Semantic Tokens)
 ![Syntax Highlighting](images/syntax_highlighting.png)
 
 ### Definition
