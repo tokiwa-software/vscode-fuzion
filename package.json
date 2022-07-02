@@ -41,7 +41,7 @@
                     ],
                     "items": {
                         "type": "string",
-                        "enum": [
+                        "examples": [
                             "java.base",
                             "java.datatransfer",
                             "java.desktop",
