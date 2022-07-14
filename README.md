@@ -27,11 +27,12 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 - (optional) attach to java debugger at port 8000
 
 ## Build
-- `npm run vscode:package`
+- `make build-vsix` which should produce an artifact like `fuzion-lang-[version].vsix`
 
-## Tests
-- `make run_tests`
-- NOTE: this should work in both wsl and msys2_shell.
+
+## Distribute
+- `make publish_marketplace_visualstudio`
+- `make publish_open_vsx`
 
 ## Settings
 - fuzion.java.modules
