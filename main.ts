@@ -28,6 +28,21 @@ function checkJava() {
   return true;
 }
 
+function findFreePort() {
+  return new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.on('listening', function () {
+      const port = server.address().port;
+      server.close();
+      resolve(port);
+    })
+    server.on('error', function (err) {
+      reject();
+    })
+    server.listen(0, '127.0.0.1');
+  });
+}
+
 class OutputChannelWriter implements OutputChannel {
   constructor(private outputChannel: OutputChannel) {
     this.name = 'wrapper_' + outputChannel.name;
@@ -89,16 +104,10 @@ function start(lspServer) {
   server.stdout.on('data', function (data) {
     const stdOut = data.toString().split('\n');
     stdOut.forEach(line => serverOutputChannel.appendLine('stdout: ' + line));
-    const port = stdOut
-      .filter(line => line.startsWith('socket opened on port:'))
-      .map(line => parseInt(line.replace(/\D*/g, '')))
-      .find(() => true);
-    if (!port) {
-      return;
-    }
+
 
     const serverOptions: ServerOptions = () => {
-      const socket = net.connect(port);
+      const socket = net.connect(lspServer.port);
       const result = {
         writer: socket,
         reader: socket
@@ -122,7 +131,7 @@ function start(lspServer) {
   });
 }
 
-function activate(context: ExtensionContext) {
+async function activate(context: ExtensionContext) {
   const transportKind = TransportKind.socket;
   isDebug = context.extensionMode == vscode.ExtensionMode.Development;
 
@@ -137,15 +146,18 @@ function activate(context: ExtensionContext) {
   }
 
   if (transportKind === TransportKind.socket) {
-    start(getSpawnArgs(context));
+    start(await getSpawnArgs(context));
   }
 }
 
-function getSpawnArgs(context: ExtensionContext) {
+
+async function getSpawnArgs(context: ExtensionContext) {
+  const port = await findFreePort();
+
   if (!isDebug) {
     return {
       command: 'java',
-      arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./out.jar`, `-tcp`],
+      arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./out.jar`, `-socket`, `--port=` + port],
       options: {
         env: {
           ...process.env,
@@ -154,7 +166,8 @@ function getSpawnArgs(context: ExtensionContext) {
           "DEBUG": "false",
         },
         cwd: `${context.extensionPath}/fuzion-lsp-server/`
-      }
+      },
+      port:port
     };
   }
 
@@ -183,9 +196,11 @@ function getSpawnArgs(context: ExtensionContext) {
         "PRECONDITIONS": "true",
         "POSTCONDITIONS": "true",
         "DEBUG": "true",
+        "LANGUAGE_SERVER_PORT": port
       },
       cwd: `${context.extensionPath}/fuzion-lsp-server/`
-    }
+    },
+    port:port
   };
 }
 
