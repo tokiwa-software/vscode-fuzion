@@ -49,6 +49,20 @@
                         ]
                     },
                     "description": "Which java modules to enable"
+                },
+                "fuzion.options": {
+                    "type": "object",
+                    "properties": {
+                        "verbosity": {
+                            "type": "number"
+                        },
+                        "debugLevel": {
+                            "type": "number"
+                        },
+                        "safety": {
+                            "type": "boolean"
+                        }
+                    }
                 }
             }
         },
