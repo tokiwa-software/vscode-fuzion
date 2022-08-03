@@ -74,12 +74,21 @@
             "editor.semanticTokenColorCustomizations": {
                 "rules": {
                     "operator": {
-                        "fontStyle": "bold"
+                        "bold": true
                     },
                     "namespace": {
-                        "fontStyle": "bold"
+                        "bold": true
                     },
                     "comment": {
+                        "italic": true
+                    },
+                    "type": {
+                        "italic": true
+                    },
+                    "typeParameter": {
+                        "italic": true
+                    },
+                    "*.typeArgument": {
                         "italic": true
                     }
                 }
