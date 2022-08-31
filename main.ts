@@ -77,9 +77,7 @@ class OutputChannelWriter implements OutputChannel {
 }
 
 function start(lspServer) {
-  if (client) {
-    client.stop();
-  }
+  try { client?.stop(); } catch { }
 
   startCount++;
   if (maxRestartCount < startCount) {
@@ -167,7 +165,7 @@ async function getSpawnArgs(context: ExtensionContext) {
         },
         cwd: `${context.extensionPath}/fuzion-lsp-server/`
       },
-      port:port
+      port: port
     };
   }
 
@@ -200,7 +198,7 @@ async function getSpawnArgs(context: ExtensionContext) {
       },
       cwd: `${context.extensionPath}/fuzion-lsp-server/`
     },
-    port:port
+    port: port
   };
 }
 
