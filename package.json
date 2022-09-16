@@ -61,6 +61,9 @@
                         },
                         "safety": {
                             "type": "boolean"
+                        },
+                        "enableUnsafeIntrinsics": {
+                            "type": "boolean"
                         }
                     }
                 }
