@@ -65,6 +65,11 @@
                     "default": false,
                     "description": "Activate code lens to view a call graph of a feature."
                 },
+                "fuzion.inlay_hints": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Toggle inlay hints."
+                },
                 "fuzion.options": {
                     "type": "object",
                     "properties": {
