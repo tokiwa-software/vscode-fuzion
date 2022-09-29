@@ -50,6 +50,18 @@
                     },
                     "description": "Which java modules to enable"
                 },
+                "fuzion.code_lens.syntax_tree": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "fuzion.code_lens.run": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "fuzion.code_lens.call_graph": {
+                    "type": "boolean",
+                    "default": false
+                },
                 "fuzion.options": {
                     "type": "object",
                     "properties": {
