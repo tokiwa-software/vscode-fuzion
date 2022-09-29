@@ -52,15 +52,18 @@
                 },
                 "fuzion.code_lens.syntax_tree": {
                     "type": "boolean",
-                    "default": false
+                    "default": false,
+                    "description": "Activate code lens to allow viewing the syntax tree of a file."
                 },
                 "fuzion.code_lens.run": {
                     "type": "boolean",
-                    "default": false
+                    "default": false,
+                    "description": "Activate code lens to execute a fuzion file."
                 },
                 "fuzion.code_lens.call_graph": {
                     "type": "boolean",
-                    "default": false
+                    "default": false,
+                    "description": "Activate code lens to view a call graph of a feature."
                 },
                 "fuzion.options": {
                     "type": "object",
@@ -77,7 +80,8 @@
                         "enableUnsafeIntrinsics": {
                             "type": "boolean"
                         }
-                    }
+                    },
+                    "description": "Specify the configuration of the front end: verbosity etc."
                 }
             }
         },
