@@ -35,6 +35,8 @@ jobs:
       run: make build-vsix
 
     - name: publish
+      env:
+        OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}
       run: >
-        npx ovsx publish fuzion-lang-$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json).vsix -p ${{ secrets.OVSX_TOKEN }}
+        npx ovsx publish fuzion-lang-$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json).vsix -p $OVSX_TOKEN
 

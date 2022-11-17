@@ -31,9 +31,10 @@ jobs:
     - name: update submodule
       run: git submodule update --init --recursive
 
-    - name: set personal access tokee
-      run: >
-        export VSCE_PAT=${{ secrets.VSCE_PAT }}
+    - name: login
+      env:
+        VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      run: npx vsce login tokiwa-software
 
     - name: publish the extension
       run: npx vsce publish
