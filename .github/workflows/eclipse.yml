@@ -36,5 +36,5 @@ jobs:
 
     - name: publish
       run: >
-        npx ovsx publish fuzion-lang-$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json).vsix -p ${{ secrets.OSVX_TOKEN }}
+        npx ovsx publish fuzion-lang-$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json).vsix -p ${{ secrets.OVSX_TOKEN }}
 
