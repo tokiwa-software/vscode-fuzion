@@ -1,0 +1,40 @@
+name: publish on eclipse marketplace
+
+on:
+  # schedule:
+  # - cron: "0 4 * * 0"
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup jdk-17
+      uses: actions/setup-java@main
+      with:
+        java-version: 17
+        distribution: 'adopt'
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+
+    - name: package version
+      id: package-version
+      run: >
+        echo ::set-output name=version::$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json)
+
+    - name: update submodule
+      run: git submodule update --init --recursive
+
+    - name: build vsix package
+      run: make build-vsix
+
+    - name: publish
+      run: >
+        npx ovsx publish fuzion-lang-$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json).vsix -p ${{ secrets.OSVX_TOKEN }}
+
