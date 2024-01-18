@@ -80,8 +80,15 @@ This is a Visual Studio Code extension to support development in the [Fuzion Pro
 ### Call Graph
 ![Call Graph](images/lsp_code_lens_call_graph.png)
 
-### Inlay Hints
+<!-- NYI ### Inlay Hints
 ![Inlay Hints](images/lsp_inlay_hints.png)
+
+                "fuzion.inlay_hints": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Toggle inlay hints."
+                },
+ -->
 
 ## Known Windows (wsl) problems/workaround
 
