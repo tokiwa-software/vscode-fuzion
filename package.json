@@ -2,7 +2,7 @@
     "name": "fuzion-lang",
     "displayName": "Fuzion",
     "description": "This extension supports development in the Fuzion programming language",
-    "version": "0.84.1",
+    "version": "0.86.0",
     "engines": {
         "vscode": "^1.67.0"
     },
@@ -68,7 +68,7 @@
                 "fuzion.inlay_hints": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Toggle inlay hints."
+                    "description": "Toggle inlay hints. (Currently broken.)"
                 },
                 "fuzion.middle_end_enabled": {
                     "type": "boolean",
