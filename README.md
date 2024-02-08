@@ -2,23 +2,23 @@
 
 This is a Visual Studio Code extension to support development in the [Fuzion Programming Language](https://flang.dev).
 
-## Install (Java 17 required)
+## Install (Java 21 required)
 - https://marketplace.visualstudio.com/items?itemName=tokiwa-software.fuzion-lang
 - https://open-vsx.org/extension/tokiwa-software/fuzion-lang
 
 ## Requirements
 - `make`, `node`, `npm`, `javac`
-- install example: `sudo apt-get install make openjdk-17-jdk nodejs npm`
+- install example: `sudo apt-get install make openjdk-21-jdk nodejs npm`
 
 ### Windows (additional requirements)
 - install wsl (Windows Subsytem for Linux)
-- in wsl: `sudo apt-get install openjdk-17-jdk nodejs npm`
+- in wsl: `sudo apt-get install openjdk-21-jdk nodejs npm`
 - set vscode-setting: "terminal.integrated.defaultProfile.windows": "Ubuntu-20.04 (WSL)"
 - NOTE: the following is only neeeded when debugging on windows
 - OR when you want to run `make run_tests` with 'windows-style' paths.
 1) install https://www.msys2.org/
 2) in msys2_shell install make: `pacman -S make`
-3) install OpenJDK 17 or higher for Windows.
+3) install OpenJDK 21 or higher for Windows.
 
 ## Develop
 - `git submodule update --init --recursive`
