@@ -2,3 +2,7 @@
 	path = fuzion-lsp-server
 	url = https://github.com/tokiwa-software/fuzion-lsp-server
 	branch = main
+[submodule "fuzion"]
+	path = fuzion
+	url = https://github.com/tokiwa-software/fuzion
+	branch = main
