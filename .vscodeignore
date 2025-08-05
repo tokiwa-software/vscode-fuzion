@@ -3,10 +3,10 @@
 .gitignore
 .github
 vsc-extension-quickstart.md
-!fuzion-lsp-server/out.jar
-!fuzion-lsp-server/jars/**
-!fuzion-lsp-server/fuzion/build/bin/**
-!fuzion-lsp-server/fuzion/build/lib/**
-!fuzion-lsp-server/fuzion/build/modules/*.fum
-fuzion-lsp-server/**
+!fuzion/build/lsp.jar
+!fuzion/build/jars/**
+!fuzion/build/bin/**
+!fuzion/build/lib/**
+!fuzion/build/modules/*.fum
+fuzion/**
 node_modules/**

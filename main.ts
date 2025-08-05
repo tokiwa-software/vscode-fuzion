@@ -155,7 +155,7 @@ async function getSpawnArgs(context: ExtensionContext) {
   if (!isDebug) {
     return {
       command: 'java',
-      arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion/build`, `-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./out.jar`, `-socket`, `--port=` + port],
+      arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion/build`, `-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./build/lsp.jar`, `-socket`, `--port=` + port],
       options: {
         env: {
           ...process.env,
