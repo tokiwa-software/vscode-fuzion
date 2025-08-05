@@ -1,5 +1,5 @@
 clean:
-	make -C fuzion-lsp-server clean
+	make -C fuzion clean
 	rm -f *.vsix
 	rm -f *.js
 	rm -f *.js.map

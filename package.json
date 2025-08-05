@@ -141,7 +141,7 @@
     "scripts": {
         "esbuild": "esbuild ./main.ts --bundle --outfile=main.js --external:vscode --format=cjs --platform=node --sourcemap",
         "###comment: vscode:prepublish is called automatically by vscode:package": "",
-        "vscode:prepublish": "npm i && npm run esbuild && make -C fuzion-lsp-server release",
+        "vscode:prepublish": "npm i && npm run esbuild && make -C fuzion lsp/release",
         "vscode:package": "npx @vscode/vsce package",
         "ovsx-publish": "echo 'npx ovsx publish fuzion-lang-${version}.vsix -p <token>'"
     },

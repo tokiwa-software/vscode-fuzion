@@ -155,7 +155,7 @@ async function getSpawnArgs(context: ExtensionContext) {
   if (!isDebug) {
     return {
       command: 'java',
-      arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion-lsp-server/fuzion/build`, `-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./out.jar`, `-socket`, `--port=` + port],
+      arguments: [`-Dfuzion.home=${context.extensionPath}/fuzion/build`, `-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./out.jar`, `-socket`, `--port=` + port],
       options: {
         env: {
           ...process.env,
@@ -163,7 +163,7 @@ async function getSpawnArgs(context: ExtensionContext) {
           "POSTCONDITIONS": "false",
           "DEBUG": "false",
         },
-        cwd: `${context.extensionPath}/fuzion-lsp-server/`
+        cwd: `${context.extensionPath}/fuzion/`
       },
       port: port
     };
@@ -187,7 +187,7 @@ async function getSpawnArgs(context: ExtensionContext) {
   }
   return {
     command: 'make',
-    arguments: [`-s`, `debug`],
+    arguments: [`-s`, `lsp/debug/socket`],
     options: {
       env: {
         ...process.env,
@@ -196,7 +196,7 @@ async function getSpawnArgs(context: ExtensionContext) {
         "DEBUG": "true",
         "LANGUAGE_SERVER_PORT": port
       },
-      cwd: `${context.extensionPath}/fuzion-lsp-server/`
+      cwd: `${context.extensionPath}/fuzion/`
     },
     port: port
   };
