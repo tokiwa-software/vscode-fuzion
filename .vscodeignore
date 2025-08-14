@@ -1,12 +1,11 @@
 .vscode/**
 .vscode-test/**
 .gitignore
-.github
+.gitattributes
+Makefile
+package-lock.json
+.github/**
 vsc-extension-quickstart.md
-!fuzion/build/lsp.jar
-!fuzion/build/jars/**
-!fuzion/build/bin/**
-!fuzion/build/lib/**
-!fuzion/build/modules/*.fum
+!fuzion/build/**
 fuzion/**
 node_modules/**
