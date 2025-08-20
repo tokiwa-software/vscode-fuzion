@@ -2,7 +2,7 @@
     "name": "fuzion-lang",
     "displayName": "Fuzion",
     "description": "This extension supports development in the Fuzion programming language",
-    "version": "0.94.1",
+    "version": "0.94.2",
     "engines": {
         "vscode": "^1.67.0"
     },
@@ -35,7 +35,7 @@
             "title": "fuzion",
             "type": "object",
             "properties": {
-                "fuzion.java.modules": {
+                "fuzion.modules": {
                     "type": [
                         "array"
                     ],
@@ -48,7 +48,8 @@
                             "java.xml"
                         ]
                     },
-                    "description": "Which java modules to enable"
+                    "description": "Which modules to enable",
+                    "default" : [ "lock_free", "terminal", "java.base", "uuid", "http" ]
                 },
                 "fuzion.code_lens.syntax_tree": {
                     "type": "boolean",
@@ -97,7 +98,6 @@
         },
         "configurationDefaults": {
             "[Fuzion]": {
-                "editor.wordBasedSuggestions": false,
                 "editor.semanticHighlighting.enabled": true
             },
             "editor.semanticTokenColorCustomizations": {
