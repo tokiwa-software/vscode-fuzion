@@ -2,7 +2,7 @@
     "name": "fuzion-lang",
     "displayName": "Fuzion",
     "description": "This extension supports development in the Fuzion programming language",
-    "version": "0.95.1",
+    "version": "0.95.2",
     "engines": {
         "vscode": "^1.67.0"
     },
