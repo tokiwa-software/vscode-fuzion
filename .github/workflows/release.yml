@@ -19,7 +19,7 @@ jobs:
         echo "JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64" >> $GITHUB_ENV
         echo "/usr/lib/jvm/java-25-openjdk-amd64/bin" >> $GITHUB_PATH
 
-    - uses: actions/setup-node@v6
+    - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238
       with:
         node-version: '20'
         cache: 'npm'
@@ -35,7 +35,7 @@ jobs:
     - name: build vsix package
       run: make build-vsix
 
-    - uses: ncipollo/release-action@v1
+    - uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b
       with:
         artifacts: "fuzion-lang-${{ steps.package-version.outputs.version }}.vsix"
         tag: "v${{ steps.package-version.outputs.version }}"
