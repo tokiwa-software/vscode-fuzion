@@ -155,7 +155,7 @@ async function getSpawnArgs(context: ExtensionContext) {
   if (!isDebug) {
     return {
       command: 'java',
-      arguments: [ /* NYI: CLEANUP: remove enable-preview etc */`--enable-preview`, `--enable-native-access=ALL-UNNAMED`, `-Dfuzion.home=${context.extensionPath}/fuzion/build`, `-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-jar`, `./build/fuzion.jar`, `-socket`, `--port=` + port],
+      arguments: [ /* NYI: CLEANUP: remove enable-preview etc */`--enable-preview`, `--enable-native-access=ALL-UNNAMED`, `-Dfuzion.home=${context.extensionPath}/fuzion/build`, `-Dfile.encoding=UTF-8`, `-Xss${javaThreadStackSizeMB}m`, `-cp`, `./build/fuzion.jar`, `dev.flang.lsp.Main`, `-socket`, `--port=` + port],
       options: {
         env: {
           ...process.env,
