@@ -71,6 +71,21 @@ class OutputChannelWriter implements OutputChannel {
   hide(): void {
     throw new Error('Method not implemented.');
   }
+  error(message: string): void {
+    this.outputChannel.appendLine(`ERROR: ${message}`);
+  }
+  warn(message: string): void {
+    this.outputChannel.appendLine(`WARN: ${message}`);
+  }
+  info(message: string): void {
+    this.outputChannel.appendLine(`INFO: ${message}`);
+  }
+  log(message: string): void {
+    this.outputChannel.appendLine(`LOG: ${message}`);
+  }
+  debug(message: string): void {
+    this.outputChannel.appendLine(`DEBUG: ${message}`);
+  }
   dispose(): void {
     this.outputChannel.dispose();
   }
