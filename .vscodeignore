@@ -6,6 +6,12 @@ Makefile
 package-lock.json
 .github/**
 vsc-extension-quickstart.md
-!fuzion/build/**
+!fuzion/build/bin/**
+!fuzion/build/classes/**
+!fuzion/build/classes_lsp/**
+!fuzion/build/lib/**
+!fuzion/build/modules/**
+!fuzion/build/jars/**
+!fuzion/build/fuzion.jar
 fuzion/**
 node_modules/**
