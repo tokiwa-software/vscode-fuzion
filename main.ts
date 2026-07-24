@@ -14,7 +14,7 @@ const javaThreadStackSizeMB = 16;
 let client: LanguageClient;
 let server: child_process.ChildProcessWithoutNullStreams;
 let clientChannel: vscode.OutputChannel;
-let serverMessageOutputChannel: vscode.OutputChannel;
+let serverMessageOutputChannel: vscode.LogOutputChannel;
 let serverOutputChannel: vscode.OutputChannel;
 
 function checkJava() {
@@ -41,54 +41,6 @@ function findFreePort() {
     })
     server.listen(0, '127.0.0.1');
   });
-}
-
-class OutputChannelWriter implements OutputChannel {
-  constructor(private outputChannel: OutputChannel) {
-    this.name = 'wrapper_' + outputChannel.name;
-  }
-  name: string;
-  append(value: string): void {
-    if (isDebug) {
-      fs.appendFileSync(os.tmpdir() + `/${this.outputChannel.name}.log`, value);
-    }
-    this.outputChannel.append(value);
-  }
-  appendLine(value: string): void {
-    if (isDebug) {
-      fs.appendFileSync(os.tmpdir() + `/${this.outputChannel.name}.log`, value + '\n')
-    }
-    this.outputChannel.appendLine(value);
-  }
-  clear(): void {
-    this.outputChannel.clear();
-  }
-  show(preserveFocus?: boolean): void;
-  show(column?: vscode.ViewColumn, preserveFocus?: boolean): void;
-  show(column?: any, preserveFocus?: any): void {
-    throw new Error('Method not implemented.');
-  }
-  hide(): void {
-    throw new Error('Method not implemented.');
-  }
-  error(message: string): void {
-    this.outputChannel.appendLine(`ERROR: ${message}`);
-  }
-  warn(message: string): void {
-    this.outputChannel.appendLine(`WARN: ${message}`);
-  }
-  info(message: string): void {
-    this.outputChannel.appendLine(`INFO: ${message}`);
-  }
-  log(message: string): void {
-    this.outputChannel.appendLine(`LOG: ${message}`);
-  }
-  debug(message: string): void {
-    this.outputChannel.appendLine(`DEBUG: ${message}`);
-  }
-  dispose(): void {
-    this.outputChannel.dispose();
-  }
 }
 
 function start(lspServer) {
@@ -130,7 +82,7 @@ function start(lspServer) {
 
     const clientOptions: LanguageClientOptions = {
       documentSelector: [{ scheme: 'file', language: 'Fuzion' }],
-      outputChannel: new OutputChannelWriter(serverMessageOutputChannel)
+      outputChannel: serverMessageOutputChannel
     };
 
     client = new LanguageClient(
@@ -148,9 +100,9 @@ async function activate(context: ExtensionContext) {
   const transportKind = TransportKind.socket;
   isDebug = context.extensionMode == vscode.ExtensionMode.Development;
 
-  clientChannel = vscode.window.createOutputChannel("vscode-fuzion");
-  serverMessageOutputChannel = vscode.window.createOutputChannel("vscode-fuzion_server_message");
-  serverOutputChannel = vscode.window.createOutputChannel("vscode-fuzion_server");
+  clientChannel = vscode.window.createOutputChannel("vscode-fuzion", { log: true });
+  serverMessageOutputChannel = vscode.window.createOutputChannel("vscode-fuzion_server_message", { log: true });
+  serverOutputChannel = vscode.window.createOutputChannel("vscode-fuzion_server", { log: true });
 
   context.subscriptions.push(clientChannel);
 
