@@ -98,3 +98,14 @@ Problem: tar EPERM: operation not permitted, futime
 Workaround: `sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata,uid=1000,gid=1000,umask=22,fmask=111`
 
 ---
+
+
+# Marketplace tokens
+
+get/renew them here:
+
+- VSCE_PAT https://dev.azure.com/tokiwa-software/_usersSettings/tokens
+- OVSX_TOKEN https://open-vsx.org/user-settings/tokens
+
+need to be saved in github, here:
+- https://github.com/tokiwa-software/vscode-fuzion/settings/secrets/actions
